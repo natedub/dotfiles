@@ -1,0 +1,13 @@
+[user]
+	name = Nathan Wright
+	email = nathan@mediacore.com
+[color]
+	ui = auto
+[web]
+	browser = open
+[gc]
+	auto = 0
+[core]
+	excludesfile = ~/.gitignore
+[rerere]
+	enabled = false

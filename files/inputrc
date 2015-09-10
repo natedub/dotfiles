@@ -1,0 +1,6 @@
+set editing-mode vi
+#set keymap vi-insert
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-query-items 0
+set page-completions off

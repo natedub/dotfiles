@@ -1,0 +1,108 @@
+export PATH=~/bin:/usr/local/bin:$PATH
+
+export TOD_FILE_REPO=~/Development/dotfiles
+
+export EDITOR=vim
+
+# Don't logout when i hit ctrl+d (unless i do it twice)
+export IGNOREEOF=1
+
+# boot2docker
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/nate/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1
+
+alias b2d=boot2docker
+
+# Colorize
+export CLICOLOR=1
+alias ls='ls -G -l'
+
+# Increase the .bash_history length to 20k lines
+export HISTFILESIZE=20000
+
+# Fancy prompt that displays the current git branch
+export PS1="\[\e[34m\]\u@\h \[\e[32m\]\W\[\e[33m\]\$(git branch 2>/dev/null | grep '^*' | sed -e 's/^* /:/')\[\e[37m\]$\[\e[00m\] "
+
+# Use the arrow keys to *search* through history rather than scroll up/down
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+alias qgit='qgit --branches --remotes --since="6 months ago" &> /dev/null &'
+alias gitst="git status --column=auto"
+alias gitc="git commit"
+alias gitcam='git commit --amend -C HEAD'
+alias gitd="git diff"
+alias gitdi="vim -c Gdiff"
+alias gitrb="git rebase"
+alias gitrbi="git rebase --autosquash -i"
+alias gitrbic="git rebase -i \`git merge-base origin/master head\`"
+alias gitrba="git rebase --abort"
+alias gitrbc="git rebase --continue"
+alias gitrbs="git rebase --skip"
+alias gitrbo="git rebase --onto"
+alias gitsrc="git show \`head -n 1 .git/rebase-apply/patch\`"
+alias gitco="git checkout"
+alias gitcp="git cherry-pick"
+alias gitbr="git branch"
+alias gitf="git fetch"
+alias gita="git add"
+alias gitai="git add -i"
+alias gitstg='git diff --cached'
+alias gitap="git add -p"
+alias gitmv="git mv"
+alias gitrm="git rm"
+alias gitmf="git merge --ff-only"
+alias gitmg="git merge --no-ff"
+alias gitmm="CURRENT_BRANCH=\`git rev-parse --abbrev-ref HEAD\`; git checkout master && git merge --no-ff \$CURRENT_BRANCH"
+alias gitsth="git stash"
+alias gitrst="git reset"
+alias gitpo="git push origin"
+alias gitpoc='git push origin `git rev-parse --abbrev-ref HEAD`'
+alias gitgrep="git grep -I -n --break --heading"
+alias gitgrepo="PAGER=vi git grep -I -n -O"
+alias gitres="PAGER=vi git grep -I -n -O '<<<<<<<'"
+alias gitresd="git status --porcelain | grep -E '^(UU|AA) ' | awk '{print \$2}' | xargs git add"
+alias gitlg='git log --color --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --'
+
+gitundo() {
+	git reset head $1 && git checkout $1
+}
+
+gitrbof() {
+	git rebase --onto $1 `git merge-base origin/master head`
+}
+gitrblf() {
+	git rebase --onto $1 origin/$1
+}
+
+gitpr() {
+	git checkout $1;
+	git reset --hard origin/$1;
+}
+
+gitcleanup() {
+	git remote prune origin;
+	for x in `git branch --merged origin/master | grep -v master`; do git branch -d $x; done;
+	for x in `git branch -r --merged origin/master | grep -v master | grep -v production | awk '{print(substr($1, 8))}'`; do git push origin :$x; done;
+}
+
+
+gitignoreconficted() { 
+	echo git add $1 && git reset HEAD $1 || git checkout $1;
+}
+
+# Show a list of all changed files in the specified commit. defaults to HEAD
+gitcf() { 
+	git show --pretty="format:" --name-only $1..$2 | grep . | sort | uniq; 
+}
+gitcfo() { 
+	CFO_BASE=$1 vim -c "Gdiff $1" `git show --pretty="format:" --name-only $1..$2 | grep . | sort | uniq`; 
+}
+
+# Cherry-pick the changes from a commit excluding whitespace-only changes from the diff
+gitdwa() {
+	git diff -w -- $1^ $1 | git apply && git commit -a -c $1;
+}
+
+eval "$(direnv hook bash)"
