@@ -105,4 +105,11 @@ gitdwa() {
 	git diff -w -- $1^ $1 | git apply && git commit -a -c $1;
 }
 
+venv_activate() {
+	deactivate &> /dev/null;
+	source "$1"/bin/activate;
+}
+
+source ~/.profilelocal
+
 eval "$(direnv hook bash)"
