@@ -56,6 +56,7 @@ autocmd! BufRead,BufNewFile *.proto setfiletype proto
 autocmd! BufRead,BufNewFile *.gss setfiletype css
 autocmd! BufRead,BufNewFile *.as setfiletype actionscript
 autocmd! BufRead,BufNewFile *.jinja2,*.jinja2js,*.jinja set filetype=htmljinja
+autocmd! BufRead,BufNewFile .envrc setfiletype bash
 
 " tab widths
 set tabstop=4
