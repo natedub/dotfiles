@@ -99,9 +99,7 @@ syntax keyword javaScriptFutureKeys     abstract enum int short boolean export i
   syntax keyword javaScriptDomNodeConsts  ELEMENT_NODE ATTRIBUTE_NODE TEXT_NODE CDATA_SECTION_NODE ENTITY_REFERENCE_NODE ENTITY_NODE PROCESSING_INSTRUCTION_NODE COMMENT_NODE DOCUMENT_NODE DOCUMENT_TYPE_NODE DOCUMENT_FRAGMENT_NODE NOTATION_NODE
 
   " HTML events and internal variables
-  syntax case ignore
   syntax keyword javaScriptHtmlEvents     onblur onclick oncontextmenu ondblclick onfocus onkeydown onkeypress onkeyup onmousedown onmousemove onmouseout onmouseover onmouseup onresize
-  syntax case match
 
 " Follow stuff should be highligh within a special context
 " While it can't be handled with context depended with Regex based highlight
