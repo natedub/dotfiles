@@ -53,10 +53,11 @@ filetype plugin on
 filetype indent on
 
 " uncommon file types
+autocmd! BufRead,BufNewFile *.wsgi setfiletype python
 autocmd! BufRead,BufNewFile *.proto setfiletype proto
 autocmd! BufRead,BufNewFile *.gss setfiletype css
 autocmd! BufRead,BufNewFile *.as setfiletype actionscript
-autocmd! BufRead,BufNewFile *.jinja2,*.jinja2js,*.jinja set filetype=htmljinja
+autocmd! BufRead,BufNewFile *.jinja2,*.jinja2js,*.jinja setfiletype htmljinja
 autocmd! BufRead,BufNewFile .envrc setfiletype bash
 
 " tab widths
