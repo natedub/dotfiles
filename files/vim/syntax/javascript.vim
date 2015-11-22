@@ -71,22 +71,22 @@ syntax keyword javaScriptPrototype      prototype
 
 "" Programm Keywords
 syntax keyword javaScriptSource         import export
-syntax keyword javaScriptType           const this undefined var void yield 
-syntax keyword javaScriptOperator       delete new in instanceof let typeof
+syntax keyword javaScriptType           const this undefined var void yield exports let
+syntax keyword javaScriptOperator       delete new in instanceof typeof
 syntax keyword javaScriptBoolean        true false
 syntax keyword javaScriptNull           null
 
 "" Statement Keywords
 syntax keyword javaScriptConditional    if else
 syntax keyword javaScriptRepeat         do while for
-syntax keyword javaScriptBranch         break continue switch case default return
+syntax keyword javaScriptBranch         break continue switch case default return class extends static super
 syntax keyword javaScriptStatement      try catch throw with finally
 
 syntax keyword javaScriptGlobalObjects  Array Boolean Date Function Infinity JavaArray JavaClass JavaObject JavaPackage Math Number NaN Object Packages RegExp String Undefined java netscape sun
 
 syntax keyword javaScriptExceptions     Error EvalError RangeError ReferenceError SyntaxError TypeError URIError
 
-syntax keyword javaScriptFutureKeys     abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public
+syntax keyword javaScriptFutureKeys     abstract enum int short boolean export interface byte long char final native synchronized float package throws const goto private transient debugger implements protected volatile double import public
 
 "" DOM/HTML/CSS specified things
 
