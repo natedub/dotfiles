@@ -47,8 +47,8 @@ if !exists("javascript_ignore_javaScriptdoc")
   "unlet b:current_syntax
 
   syntax region javaScriptDocComment    matchgroup=javaScriptComment start="/\*\*\s*"  end="\*/" contains=javaScriptDocTags,javaScriptCommentTodo,javaScriptCvsTag,@javaScriptHtml,@Spell fold
-  syntax match  javaScriptDocTags       contained "@\(code\|param\|return\|suppress\|define\|enum\|implements\|argument\|requires\|exception\|throws\|private\|protected\|type\|this\|typedef\|class\|extends\|template\|see\|link\|member\|module\|method\|title\|namespace\|optional\|default\|base\|file\)\>" nextgroup=javaScriptDocParam,javaScriptDocSeeTag skipwhite skipnl
-  syntax match  javaScriptDocTags       contained "@\(struct\|dict\|interface\|notypecheck\|beta\|deprecated\|inheritDoc\|override\|description\|fileoverview\|author\|license\|version\|constructor\|const\|preserve\|nosideeffects\|final\|ignore\|addon\|exec\)\>"
+  syntax match  javaScriptDocTags       contained "@\(code\|param\|return\|suppress\|define\|enum\|implements\|argument\|requires\|exception\|throws\|private\|protected\|type\|const\|this\|typedef\|class\|extends\|template\|see\|link\|member\|module\|method\|title\|namespace\|optional\|default\|base\|file\)\>" nextgroup=javaScriptDocParam,javaScriptDocSeeTag skipwhite skipnl
+  syntax match  javaScriptDocTags       contained "@\(struct\|dict\|unrestricted\|interface\|notypecheck\|beta\|deprecated\|inheritDoc\|override\|description\|fileoverview\|author\|license\|version\|constructor\|preserve\|nosideeffects\|final\|ignore\|addon\|exec\)\>"
   syntax match  javaScriptDocParam      contained "\%(#\|\w\|\.\|:\|\/\)\+"
   syntax region javaScriptDocSeeTag     contained matchgroup=javaScriptDocSeeTag start="{" end="}" contains=javaScriptDocTags
 
