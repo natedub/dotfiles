@@ -1,18 +1,23 @@
 call plug#begin('~/.vim/plugged')
 
+"Plug 'kevinw/pyflakes-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
+Plug 'derekwyatt/vim-scala'
+Plug 'duganchen/vim-soy'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
 Plug 'hynek/vim-python-pep8-indent'
-Plug 'kevinw/pyflakes-vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'sjl/gundo.vim'
+Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/argtextobj.vim'
+Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 
@@ -42,11 +47,18 @@ set ttymouse=urxvt
 
 set laststatus=2
 
-
+let g:python_version_2=0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 let g:airline_detect_modified=1
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_python_checker_args='--ignore=E501'
 
 " enable ~/.vim/ftplugin/* file-specific scripts
 filetype plugin on
@@ -238,7 +250,7 @@ nnoremap <leader>sb vf'ssuper.<esc>f's(<esc>
 " initiate a find and replace for B to A
 nnoremap <leader>fa ^f l"ayt f'l"syt'<esc>:%s/<c-R>s/<c-R>a/gc<cr>n
 " insert 'var N = ' in front of a line containing a require
-nnoremap <leader>fi ^f'f'hvby0ivar <esc>pa = <esc>0
+nnoremap <leader>vi ^f'f'hvby0ivar <esc>pa = <esc>0
 " write a goog.module.get line for the current require
 nnoremap <leader>fg yypf't'vby0ivar <esc>pa = <esc>t(vbsmodule.get<esc>0
 " replace a goog.provide with goog.module
