@@ -11,3 +11,5 @@
 	excludesfile = ~/.gitignore
 [rerere]
 	enabled = false
+[diff "blackbox"]
+	textconv = gpg --use-agent -q --batch --decrypt
