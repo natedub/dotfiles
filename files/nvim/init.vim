@@ -46,6 +46,9 @@ Plug 'vim-airline/vim-airline'
 " The airline solarized theme plugin gets automatically enabled, apparently
 Plug 'vim-airline/vim-airline-themes'
 
+" Tab for autocomplete
+Plug 'ervandew/supertab'
+
 call plug#end()
 
 " ============================== }}}1
@@ -144,6 +147,30 @@ noremap <C-l>  <C-w>l
 " Run neoformat by hitting <space>ff
 nnoremap <leader>ff :Neoformat<cr>
 
+" Sort a block of imports (or any block. blocks are separated by blank lines)
+nnoremap <leader>si vip:!sort\|uniq<cr>
+
+" Split the comma separated import on the current line into two separate
+" imports, then sort. Returns to the same line after, so can be repeated
+" when there are many imports on the same line.
+nnoremap <leader>fi 0v/import<cr>eyf,pF,s<cr><esc>vip:!sort\|uniq<cr>
+
+" Python test assertions
+nnoremap <leader>ae ^iself.assertEqual(<esc>A)<esc>^
+nnoremap <leader>ai ^iself.assertIn(<esc>A)<esc>^
+nnoremap <leader>an ^iself.assertIsNone(<esc>A)<esc>^
+nnoremap <leader>at ^iself.assertTrue(<esc>A)<esc>^
+nnoremap <leader>af ^iself.assertFalse(<esc>A)<esc>^
+
+" ============================== }}}1
+
+" Snippets: {{{1
+
+" Python:
+iabbrev pdbst import ipdb; ipdb.set_trace()
+iabbrev log= log = logging.getLogger(__name__)
+iabbrev pprint import pprint; pprint.pprint(
+
 " ============================== }}}1
 
 " Neomake: {{{1
@@ -162,6 +189,8 @@ call neomake#configure#automake({
 
 " open quickfix/loclist only if there's output, always preserve cursor position
 let g:neomake_open_list = 2
+
+let g:neomake_java_enabled_makers = []
 
 " enable locally-installed eslint wherever possible
 let g:neomake_javascript_enabled_makers = ['eslint']
