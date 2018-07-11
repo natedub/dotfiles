@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+here=${0:a:h}
+
+ln -si $here/gitconfig ~/.gitconfig
+ln -si $here/gitignore ~/.gitignore
+ln -si $here/slate ~/.slate
+
+mkdir -p ~/.config
+ln -si $here/nvim ~/.config/nvim
+
+echo 'need sudo to symlink /etc/my.cnf'
+sudo ln -si $here/my.cnf /etc/my.cnf

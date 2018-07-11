@@ -1,5 +1,5 @@
-```bash
-pip install tod
-export TOD_FILE_REPO=path/to/this/folder
-tod link --all
-```
+My personal dotfiles.
+
+Run `./apply` to symlink these files into place.
+
+See also https://github.com/natedub/prezto for my zsh config.
