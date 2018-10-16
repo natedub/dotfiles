@@ -219,4 +219,10 @@ let g:neoformat_enabled_jsx = ['prettier']
 
 " ============================== }}}1
 
+" Filetypes: {{{1
+" ==============================
+
+" uncommon file types
+autocmd! BufRead,BufNewFile *.docker setfiletype dockerfile
+
 " vim:fdm=marker
