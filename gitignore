@@ -6,3 +6,4 @@
 *.ipr
 *.iws
 .envrc
+.python-version
