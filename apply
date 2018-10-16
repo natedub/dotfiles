@@ -2,12 +2,12 @@
 
 here=${0:a:h}
 
-ln -si $here/gitconfig ~/.gitconfig
-ln -si $here/gitignore ~/.gitignore
-ln -si $here/slate ~/.slate
+ln -siv $here/gitconfig ~/.gitconfig
+ln -siv $here/gitignore ~/.gitignore
+ln -siv $here/slate ~/.slate
 
 mkdir -p ~/.config
-ln -si $here/nvim ~/.config/nvim
+ln -siv $here/nvim ~/.config/nvim
 
 echo 'need sudo to symlink /etc/my.cnf'
-sudo ln -si $here/my.cnf /etc/my.cnf
+sudo ln -siv $here/my.cnf /etc/my.cnf
