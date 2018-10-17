@@ -46,8 +46,8 @@ Plug 'vim-airline/vim-airline'
 " The airline solarized theme plugin gets automatically enabled, apparently
 Plug 'vim-airline/vim-airline-themes'
 
-" Tab for autocomplete
-Plug 'ervandew/supertab'
+" For async completion (added for typescript)
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 
@@ -234,6 +234,11 @@ autocmd! BufRead,BufNewFile *.docker setfiletype dockerfile
 " see https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
 let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
 let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+
+" asynchronous autocompletion
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible()? "\<c-n>" : "\<tab>"
+set completeopt=menu,preview,noinsert
 
 " ============================== }}}1
 
