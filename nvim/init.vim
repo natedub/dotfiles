@@ -49,6 +49,12 @@ Plug 'vim-airline/vim-airline-themes'
 " For async completion (added for typescript)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+" yet another typescript syntax plugin
+Plug 'HerringtonDarkholme/yats.vim'
+
+" typescript language server plugin
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+
 call plug#end()
 
 " ============================== }}}1
