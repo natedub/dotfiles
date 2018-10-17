@@ -225,4 +225,16 @@ let g:neoformat_enabled_jsx = ['prettier']
 " uncommon file types
 autocmd! BufRead,BufNewFile *.docker setfiletype dockerfile
 
+" ============================== }}}1
+
+" Configure misc plugins: {{{1
+" ==============================
+
+" python environments
+" see https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
+let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
+let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+
+" ============================== }}}1
+
 " vim:fdm=marker
