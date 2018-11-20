@@ -13,3 +13,8 @@
 	enabled = false
 [diff "blackbox"]
 	textconv = gpg --use-agent -q --batch --decrypt
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
