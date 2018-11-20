@@ -168,6 +168,9 @@ nnoremap <leader>an ^iself.assertIsNone(<esc>A)<esc>^
 nnoremap <leader>at ^iself.assertTrue(<esc>A)<esc>^
 nnoremap <leader>af ^iself.assertFalse(<esc>A)<esc>^
 
+" easily inject python dependency path when typing :e or :tabe commands
+cnoremap <c-e> <C-R>=$VIRTUAL_ENV<cr>/lib/python2.7/site-packages/
+
 " ============================== }}}1
 
 " Snippets: {{{1
