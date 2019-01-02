@@ -53,7 +53,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'HerringtonDarkholme/yats.vim'
 
 " typescript language server plugin
-"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 call plug#end()
 
