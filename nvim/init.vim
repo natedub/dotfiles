@@ -181,6 +181,33 @@ iabbrev log= log = logging.getLogger(__name__)
 iabbrev pprint import pprint; pprint.pprint(
 
 " ============================== }}}1
+"
+" Helper Functions: {{{1
+
+" Navigate up the tree looking for node_module/.bin/{binname}
+" Falls back to what I know to be the `npm bin -g` folder when using nvm
+function! GetNpmBin(binname)
+  let suffix = '/node_modules/.bin/' . a:binname
+
+  let dir = getcwd()
+  while dir != '/'
+    if filereadable(dir . suffix)
+      return dir . suffix
+    else
+      let dir = fnamemodify(dir, ':h')
+    end
+  endwhile
+
+  let dir = expand("$NVM_BIN")
+  if filereadable(dir . suffix)
+    return dir . suffix
+  end
+
+  return a:binname . '-not-found-by-nvim-GetNpmBin'
+endfunction
+
+" ============================== }}}1
+
 
 " Neomake: {{{1
 " ==============================
@@ -203,7 +230,7 @@ let g:neomake_java_enabled_makers = []
 
 " enable locally-installed eslint wherever possible
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_eslint_exe = system('PATH=$(npm bin):$PATH && which eslint | tr -d "\n"')
+let g:neomake_javascript_eslint_exe = GetNpmBin('eslint')
 
 " running neomake on unsaved files causes it to be run on dot-prefixed temp
 " files which eslint emits a warning about, so add a custom --ignore-pattern
