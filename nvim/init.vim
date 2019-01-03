@@ -145,10 +145,10 @@ nnoremap th :split<cr>
 autocmd! filetype netrw nunmap <buffer> <silent> <nowait> t
 
 " Easy buffer navigation
-noremap <C-h>  <C-w>h
-noremap <C-j>  <C-w>j
-noremap <C-k>  <C-w>k
-noremap <C-l>  <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " Run neoformat by hitting <space>ff
 nnoremap <leader>ff :Neoformat<cr>
@@ -207,7 +207,6 @@ function! GetNpmBin(binname)
 endfunction
 
 " ============================== }}}1
-
 
 " Neomake: {{{1
 " ==============================
