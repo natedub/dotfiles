@@ -235,7 +235,7 @@ let g:neomake_open_list = 2
 let g:neomake_java_enabled_makers = []
 
 " enable locally-installed eslint wherever possible
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = []
 let g:neomake_javascript_eslint_exe = GetNpmBin('eslint')
 
 " running neomake on unsaved files causes it to be run on dot-prefixed temp
