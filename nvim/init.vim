@@ -171,6 +171,13 @@ nnoremap <leader>af ^iself.assertFalse(<esc>A)<esc>^
 " easily inject python dependency path when typing :e or :tabe commands
 cnoremap <c-e> <C-R>=$VIRTUAL_ENV<cr>/lib/python2.7/site-packages/
 
+" nvim-typescript bindings
+nnoremap <leader>tg :TSDef<cr>
+nnoremap <leader>tp :TSDefPreview<cr>
+nnoremap <leader>tr :TSRefs<cr>
+nnoremap <leader>td :TSDoc<cr>
+nnoremap <leader>tt :TSType<cr>
+
 " ============================== }}}1
 
 " Snippets: {{{1
