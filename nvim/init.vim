@@ -26,7 +26,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Visualize the undo tree
-Plug 'sjl/gundo.vim'
+Plug 'mbbill/undotree'
 
 " git integration: super useful!
 Plug 'tpope/vim-fugitive'
@@ -123,8 +123,8 @@ set history=50
 " Define a leader key.
 let g:mapleader = " "
 
-" Open the gundo tree
-nnoremap <F5> :GundoToggle<CR>
+" Open the undo tree
+nnoremap <F5> :UndotreeToggle<CR>
 
 " Open and source my .vimrc file by hitting \ev or \sv
 nnoremap <leader>ev :tabe $MYVIMRC<cr>
