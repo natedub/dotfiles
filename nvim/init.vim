@@ -65,8 +65,27 @@ call plug#end()
 " Display: {{{1
 " ======================
 
-" Enable solarized dark (requires iterm2 profile be set to solarized too)
+" Set background to dark or light based on MacOS system setting; linux is dark
 set background=dark
+
+function! SetBackgroundMode(...)
+  let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
+  if s:mode ==? "dark"
+    let s:new_bg = "dark"
+  else
+    let s:new_bg = "light"
+  endif
+  if &background !=? s:new_bg
+    let &background = s:new_bg
+  endif
+endfunction
+
+if $TERM_PROGRAM ==? "iTerm.app"
+  call SetBackgroundMode()
+  call timer_start(3000, "SetBackgroundMode", {"repeat": -1})
+endif
+
+" Enable solarized dark and light (requires iterm2 profile be set to solarized too)
 colorscheme solarized
 
 " Set the terminal title to display the open file name etc
