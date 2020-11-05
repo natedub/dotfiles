@@ -41,10 +41,10 @@ Plug 'neomake/neomake'
 Plug 'sbdchd/neoformat'
 
 " Overly fancy statusline
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 
 " The airline solarized theme plugin gets automatically enabled, apparently
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 " For async completion (added for typescript)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
