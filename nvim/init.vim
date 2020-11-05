@@ -58,6 +58,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " fix double-size hanging indents
 Plug 'Vimjas/vim-python-pep8-indent'
 
+" newer than built-in python syntax -- supports f strings etc
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
 call plug#end()
 
 " ============================== }}}1
