@@ -61,6 +61,14 @@ Plug 'Vimjas/vim-python-pep8-indent'
 " newer than built-in python syntax -- supports f strings etc
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
+" handy plugin for text notes where you want to align tabular data
+"Plug 'junegunn/vim-easy-align'
+
+" fzf default plugin installed via homebrew
+"Plug '/usr/local/opt/fzf'
+" fzf.vim for nice commands :Files, :Rg
+"Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 " ============================== }}}1
@@ -83,10 +91,10 @@ function! SetBackgroundMode(...)
   endif
 endfunction
 
-if $TERM_PROGRAM ==? "iTerm.app"
-  call SetBackgroundMode()
-  call timer_start(3000, "SetBackgroundMode", {"repeat": -1})
-endif
+"if $TERM_PROGRAM ==? "iTerm.app"
+"  call SetBackgroundMode()
+"  call timer_start(3000, "SetBackgroundMode", {"repeat": -1})
+"endif
 
 " Enable solarized dark and light (requires iterm2 profile be set to solarized too)
 colorscheme solarized
@@ -101,7 +109,7 @@ set list listchars=tab:»\ ,trail:·
 set relativenumber
 
 " Override netrw defaults to show relativenumbers on directory listings
-let g:netrw_bufsettings='noma nomod nonu nobl nowrap ro relativenumber'
+"let g:netrw_bufsettings='noma nomod nonu nobl nowrap ro relativenumber'
 
 " Highlight the line under the cursor
 set cursorline
@@ -167,7 +175,8 @@ nnoremap ts :vertical botright split<cr>
 nnoremap th :split<cr>
 
 " Unmap the netrw shortcut that conflicts with the above mappings
-autocmd! filetype netrw nunmap <buffer> <silent> <nowait> t
+autocmd! FileType netrw noremap <buffer>q <Nop>
+autocmd! FileType netrw noremap <buffer>t <Nop>
 
 " Easy buffer navigation
 noremap <C-h> <C-w>h
@@ -175,16 +184,15 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Run neoformat by hitting <space>ff
+" Run neoformat by hitting <space>ff (it never runs automatically)
 nnoremap <leader>ff :Neoformat<cr>
 
-" Sort a block of imports (or any block. blocks are separated by blank lines)
-nnoremap <leader>si vip:!sort\|uniq<cr>
+" Run neomake by hitting <space>nn (otherwise it only runs on file write)
+nnoremap <leader>nn :Neomake<CR>
 
-" Split the comma separated import on the current line into two separate
-" imports, then sort. Returns to the same line after, so can be repeated
-" when there are many imports on the same line.
-nnoremap <leader>fi 0v/import<cr>eyf,pF,s<cr><esc>vip:!sort\|uniq<cr>
+" Sort a block of imports (or any block. blocks are separated by blank lines)
+nnoremap <leader>si :Neoformat isort<cr>
+nnoremap <leader>fi :Neoformat isort<cr>
 
 " Python test assertions
 nnoremap <leader>ae ^iself.assertEqual(<esc>A)<esc>^
@@ -196,13 +204,19 @@ nnoremap <leader>af ^iself.assertFalse(<esc>A)<esc>^
 
 " easily inject python dependency path when typing :e or :tabe commands
 cnoremap <c-e> <C-R>=expand('$VIRTUAL_ENV/lib/python*/site-packages/')<cr>
+cnoremap <c-s> <C-R>=expand('%:p:h')<cr>/
 
 " nvim-typescript bindings
-nnoremap <leader>tg :TSDef<cr>
-nnoremap <leader>tp :TSDefPreview<cr>
-nnoremap <leader>tr :TSRefs<cr>
-nnoremap <leader>td :TSDoc<cr>
-nnoremap <leader>tt :TSType<cr>
+"nnoremap <leader>tg :TSDef<cr>
+"nnoremap <leader>tp :TSDefPreview<cr>
+"nnoremap <leader>tr :TSRefs<cr>
+"nnoremap <leader>td :TSDoc<cr>
+"nnoremap <leader>tt :TSType<cr>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+"xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+"nmap ga <Plug>(EasyAlign)
 
 " ============================== }}}1
 
@@ -211,7 +225,6 @@ nnoremap <leader>tt :TSType<cr>
 " Python:
 iabbrev pdbst import ipdb; ipdb.set_trace()
 iabbrev log= log = logging.getLogger(__name__)
-iabbrev pprint import pprint; pprint.pprint(
 
 " ============================== }}}1
 "
@@ -247,13 +260,8 @@ endfunction
 " for debugging, see :messages
 "let g:neomake_verbose = 3
 
-" Configure neomake to run after reads/writes and 500ms after each change
-call neomake#configure#automake({
-\ 'BufRead': {'delay': 0},
-\ 'BufWritePost': {'delay': 0},
-\ 'TextChanged': {},
-\ 'InsertLeave': {},
-\ }, 500)
+" Configure neomake to run writes
+call neomake#configure#automake('w')
 
 " open quickfix/loclist only if there's output, always preserve cursor position
 let g:neomake_open_list = 2
@@ -282,8 +290,11 @@ autocmd! QuitPre * if &filetype != 'qf' | silent! lclose | endif
 " Neoformat: {{{1
 " ==============================
 
-let g:neoformat_enabled_javascript = ['prettier']
-let g:neoformat_enabled_jsx = ['prettier']
+"let g:neoformat_try_formatprg = 1
+"autocmd FileType javascript setlocal formatprg=/Users/nathan.wright/Code/cx-poc/client/node_modules/.bin/prettier\ --stdin\ --stdin-filepath\ a.js\ --config\ /Users/nathan.wright/Code/cx-poc/.prettierrc
+"autocmd FileType javascript.jsx setlocal formatprg=/Users/nathan.wright/Code/cx-poc/client/node_modules/.bin/prettier\ --stdin\ --stdin-filepath\ a.jsx\ --config\ /Users/nathan.wright/Code/cx-poc/.prettierrc
+"autocmd FileType typescript setlocal formatprg=/Users/nathan.wright/Code/cx-poc/client/node_modules/.bin/prettier\ --stdin\ --stdin-filepath\ a.ts\ --config\ /Users/nathan.wright/Code/cx-poc/.prettierrc
+"autocmd FileType typescript.tsx setlocal formatprg=/Users/nathan.wright/Code/cx-poc/client/node_modules/.bin/prettier\ --stdin\ --stdin-filepath\ a.tsx\ --config\ /Users/nathan.wright/Code/cx-poc/.prettierrc
 
 " ============================== }}}1
 
@@ -306,7 +317,10 @@ let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
 " asynchronous autocompletion
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible()? "\<c-n>" : "\<tab>"
-set completeopt=menu,preview,noinsert
+set completeopt=menu,preview,noinsert,noselect
+
+set wildmode=longest:full
+set wildignore+=*/__pycache__/*
 
 " ============================== }}}1
 
