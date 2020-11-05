@@ -50,10 +50,10 @@ Plug 'sbdchd/neoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " yet another typescript syntax plugin
-Plug 'HerringtonDarkholme/yats.vim'
+"Plug 'HerringtonDarkholme/yats.vim'
 
 " typescript language server plugin
-Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 " fix double-size hanging indents
 Plug 'Vimjas/vim-python-pep8-indent'
