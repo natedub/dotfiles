@@ -17,7 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " this fork fixes the awful bright grey neomake SignColumn where
 " line-level warnings and errors are highlighted.
 " see https://github.com/altercation/solarized/issues/252
-Plug 'jumski/vim-colors-solarized'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Always follow project specific whitespace rules
 Plug 'editorconfig/editorconfig-vim'
@@ -97,7 +97,9 @@ endfunction
 "endif
 
 " Enable solarized dark and light (requires iterm2 profile be set to solarized too)
-colorscheme solarized
+let g:dracula_colorterm = 0
+colorscheme dracula
+set termguicolors
 
 " Set the terminal title to display the open file name etc
 set title
@@ -311,8 +313,7 @@ autocmd! BufRead,BufNewFile *.docker setfiletype dockerfile
 
 " python environments
 " see https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
-let g:python_host_prog = $PYENV_ROOT . '/versions/neovim2/bin/python'
-let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim3/bin/python'
+let g:python3_host_prog = expand('~/.pyenv/versions/neovim3/bin/python')
 
 " asynchronous autocompletion
 let g:deoplete#enable_at_startup = 1
