@@ -6,10 +6,6 @@ ln -siv $here/gitconfig ~/.gitconfig
 ln -siv $here/gitignore ~/.gitignore
 ln -siv $here/slate ~/.slate
 
-iterm2_path="$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch"
-mkdir -p "$iterm2_path"
-ln -siv $here/iterm2-scripts/darkmode.py "$iterm2_path"
-
 mkdir -p ~/.config
 ln -siv $here/nvim ~/.config/nvim
 
