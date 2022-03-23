@@ -8,7 +8,7 @@ ln -siv $here/slate ~/.slate
 ln -siv $here/direnvrc ~/.direnvrc
 
 mkdir -p ~/.config
-ln -siv $here/nvim ~/.config/nvim
+ln -siv $here/nvim-lua ~/.config/nvim
 
 echo 'need sudo to symlink /etc/my.cnf'
 sudo ln -siv $here/my.cnf /etc/my.cnf
