@@ -39,10 +39,11 @@ require('packer').startup(function(use)
 
     -- base language server support
     use 'neovim/nvim-lspconfig'
-    use {'jose-elias-alvarez/null-ls.nvim', branch = 'main'}
+    --use {'jose-elias-alvarez/null-ls.nvim', branch = 'main'}
+    use 'nvim-lua/plenary.nvim'
 
     -- typescript language server
-    use {'jose-elias-alvarez/nvim-lsp-ts-utils', branch = 'main', requires = {'nvim-lua/plenary.nvim'}}
+    use {'jose-elias-alvarez/typescript.nvim', branch = 'main'}
 
     -- good autocomplete
     use {'hrsh7th/cmp-nvim-lsp', branch = 'main'}
@@ -58,10 +59,10 @@ require('packer').startup(function(use)
     -- highlight word under cursor, with lsp support
     use 'RRethy/vim-illuminate'
 
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
+--    use {
+--        'nvim-treesitter/nvim-treesitter',
+--        run = ':TSUpdate'
+--    }
 
     -- useful pairs of keymappings like [q ]q
     use 'tpope/vim-unimpaired'
@@ -131,6 +132,7 @@ mapkey('n', '<Leader>sv', ':source $MYVIMRC<cr>:bufdo e<cr>')
 mapkey('n', '<leader>ef', ':lua require"telescope.builtin".find_files()<cr>')
 mapkey('n', '<leader>ea', ':lua require"telescope.builtin".find_files({no_ignore=true})<cr>')
 mapkey('n', '<leader>gf', ':lua require"telescope.builtin".live_grep()<cr>')
+mapkey('n', '<leader>ga', ':lua require"telescope.builtin".live_grep({no_ignore=true})<cr>')
 
 --local reload = require('plenary.reload').reload_module
 require 'lsp-config'
@@ -147,34 +149,34 @@ require('nvim-tree').setup({
         ignore = false,
     },
     view = {
-        auto_resize = true,
+        adaptive_size = true,
         relativenumber = true,
         width = 50,
     }
 })
 require 'illuminate'
 
-require'nvim-treesitter.configs'.setup {
-  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-  ensure_installed = "maintained",
-
-  -- Install languages synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- List of parsers to ignore installing
-  ignore_install = { "javascript" },
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = false,
-
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+--require'nvim-treesitter.configs'.setup {
+--  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+--  ensure_installed = "maintained",
+--
+--  -- Install languages synchronously (only applied to `ensure_installed`)
+--  sync_install = false,
+--
+--  -- List of parsers to ignore installing
+--  ignore_install = { "javascript" },
+--
+--  highlight = {
+--    -- `false` will disable the whole extension
+--    enable = false,
+--
+--    -- list of language that will be disabled
+--    disable = { "c", "rust" },
+--
+--    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+--    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+--    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+--    -- Instead of true it can also be a list of languages
+--    additional_vim_regex_highlighting = false,
+--  },
+--}

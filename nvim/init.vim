@@ -35,10 +35,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 
 " make replacement for syntax and lint checking
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 
 " formatter, used for the prettier js formatter
-Plug 'sbdchd/neoformat'
+"Plug 'sbdchd/neoformat'
 
 " Overly fancy statusline
 "Plug 'vim-airline/vim-airline'
@@ -47,13 +47,23 @@ Plug 'sbdchd/neoformat'
 "Plug 'vim-airline/vim-airline-themes'
 
 " For async completion (added for typescript)
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" yet another typescript syntax plugin
-"Plug 'HerringtonDarkholme/yats.vim'
+" neovim language server
+Plug 'nvim-lua/plenary.nvim'
 
-" typescript language server plugin
-"Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'neovim/nvim-lspconfig'
+Plug 'jose-elias-alvarez/null-ls.nvim', {'branch': 'main'}
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils', {'branch': 'main'}
+
+Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
+Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
+Plug 'hrsh7th/cmp-path', {'branch': 'main'}
+Plug 'hrsh7th/cmp-cmdline', {'branch': 'main'}
+Plug 'hrsh7th/nvim-cmp', {'branch': 'main'}
+
+Plug 'hrsh7th/cmp-vsnip', {'branch': 'main'}
+Plug 'hrsh7th/vim-vsnip'
 
 " fix double-size hanging indents
 Plug 'Vimjas/vim-python-pep8-indent'
@@ -186,15 +196,8 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 
-" Run neoformat by hitting <space>ff (it never runs automatically)
-nnoremap <leader>ff :Neoformat<cr>
-
 " Run neomake by hitting <space>nn (otherwise it only runs on file write)
 nnoremap <leader>nn :Neomake<CR>
-
-" Sort a block of imports (or any block. blocks are separated by blank lines)
-nnoremap <leader>si :Neoformat isort<cr>
-nnoremap <leader>fi :Neoformat isort<cr>
 
 " Python test assertions
 nnoremap <leader>ae ^iself.assertEqual(<esc>A)<esc>^
@@ -209,11 +212,9 @@ cnoremap <c-e> <C-R>=expand('$VIRTUAL_ENV/lib/python*/site-packages/')<cr>
 cnoremap <c-s> <C-R>=expand('%:p:h')<cr>/
 
 " nvim-typescript bindings
-"nnoremap <leader>tg :TSDef<cr>
-"nnoremap <leader>tp :TSDefPreview<cr>
-"nnoremap <leader>tr :TSRefs<cr>
-"nnoremap <leader>td :TSDoc<cr>
-"nnoremap <leader>tt :TSType<cr>
+nnoremap <leader>tg :lua vim.lsp.buf.definition()<cr>
+nnoremap <leader>tr :lua vim.lsp.buf.references()<cr>
+nnoremap <leader>td :lua vim.lsp.buf.signature_help()<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 "xmap ga <Plug>(EasyAlign)
@@ -263,26 +264,26 @@ endfunction
 "let g:neomake_verbose = 3
 
 " Configure neomake to run writes
-call neomake#configure#automake('w')
-
-" open quickfix/loclist only if there's output, always preserve cursor position
-let g:neomake_open_list = 2
-
-let g:neomake_java_enabled_makers = []
-
-" enable locally-installed eslint wherever possible
-let g:neomake_javascript_enabled_makers = []
-let g:neomake_javascript_eslint_exe = GetNpmBin('eslint')
-
-" running neomake on unsaved files causes it to be run on dot-prefixed temp
-" files which eslint emits a warning about, so add a custom --ignore-pattern
-" to the default neomake eslint args
-let g:neomake_javascript_eslint_args = ['-f', 'compact', '--ignore-pattern', '!**/*.js']
-
-" jsx is the same as javascript as far as i am concerned
-let g:neomake_jsx_enabled_makers = g:neomake_javascript_enabled_makers
-let g:neomake_jsx_eslint_exe = g:neomake_javascript_eslint_exe
-let g:neomake_jsx_eslint_args = g:neomake_javascript_eslint_args
+"call neomake#configure#automake('w')
+"
+"" open quickfix/loclist only if there's output, always preserve cursor position
+"let g:neomake_open_list = 2
+"
+"let g:neomake_java_enabled_makers = []
+"
+"" enable locally-installed eslint wherever possible
+"let g:neomake_javascript_enabled_makers = []
+"let g:neomake_javascript_eslint_exe = GetNpmBin('eslint')
+"
+"" running neomake on unsaved files causes it to be run on dot-prefixed temp
+"" files which eslint emits a warning about, so add a custom --ignore-pattern
+"" to the default neomake eslint args
+"let g:neomake_javascript_eslint_args = ['-f', 'compact', '--ignore-pattern', '!**/*.js']
+"
+"" jsx is the same as javascript as far as i am concerned
+"let g:neomake_jsx_enabled_makers = g:neomake_javascript_enabled_makers
+"let g:neomake_jsx_eslint_exe = g:neomake_javascript_eslint_exe
+"let g:neomake_jsx_eslint_args = g:neomake_javascript_eslint_args
 
 " automatically close corresponding loclist when quitting a window
 autocmd! QuitPre * if &filetype != 'qf' | silent! lclose | endif
@@ -316,13 +317,16 @@ autocmd! BufRead,BufNewFile *.docker setfiletype dockerfile
 let g:python3_host_prog = expand('~/.pyenv/versions/neovim3/bin/python')
 
 " asynchronous autocompletion
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible()? "\<c-n>" : "\<tab>"
-set completeopt=menu,preview,noinsert,noselect
+"let g:deoplete#enable_at_startup = 1
+"inoremap <expr><tab> pumvisible()? "\<c-n>" : "\<tab>"
+"set completeopt=menu,preview,noinsert,noselect
 
 set wildmode=longest:full
 set wildignore+=*/__pycache__/*
 
 " ============================== }}}1
+
+lua require("lsp-config")
+lua require("cmp-config")
 
 " vim:fdm=marker

@@ -19,7 +19,7 @@ local activeLeft = {
         end,
     },
     {
-        provider = { name = 'file_info', opts = { type = 'relative-short' } },
+        provider = { name = 'file_info', opts = { type = 'relative' } },
         hl = {
             fg = 'white',
             bg = 'oceanblue',
