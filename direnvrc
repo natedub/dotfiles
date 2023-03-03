@@ -1,0 +1,26 @@
+# use a certain pyenv version
+use_python() {
+	if [ -n "$(which pyenv)" ]; then
+		local pyversion=$1
+		pyenv local ${pyversion}
+	fi
+}
+
+layout_virtualenv() {
+	local pyversion=$1
+	local pvenv=$2
+	echo 'hi'
+	if [ -n "$(which pyenv virtualenv)" ]; then
+		pyenv virtualenv --force --quiet ${pyversion} ${pvenv}-${pyversion}
+		echo 'virtualenv forced'
+	fi
+	pyenv local --unset
+}
+
+layout_activate() {
+	if [ -n "$(which pyenv)" ]; then
+		echo 'sourcing'
+		source $(pyenv root)/versions/$1/bin/activate
+		echo 'sourced'
+	fi
+}
