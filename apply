@@ -5,6 +5,13 @@ here=${0:a:h}
 ln -siv $here/gitconfig ~/.gitconfig
 ln -siv $here/gitignore ~/.gitignore
 ln -siv $here/direnvrc ~/.direnvrc
+ln -siv $here/.editorconfig ~/.editorconfig
+
+if command -v hidutil &> /dev/null; then
+	mkdir -p ~/Library/LaunchAgents
+	ln -siv $here/KeyRemapping.plist ~/Library/LaunchAgents/KeyRemapping.plist
+	launchctl load ~/Library/LaunchAgents/KeyRemapping.plist
+fi
 
 mkdir -p ~/.config
 ln -siv $here/nvim-lua ~/.config/nvim
