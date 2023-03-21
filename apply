@@ -4,7 +4,6 @@ here=${0:a:h}
 
 ln -siv $here/gitconfig ~/.gitconfig
 ln -siv $here/gitignore ~/.gitignore
-ln -siv $here/slate ~/.slate
 ln -siv $here/direnvrc ~/.direnvrc
 
 mkdir -p ~/.config
