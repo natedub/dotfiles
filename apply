@@ -14,6 +14,7 @@ if command -v hidutil &> /dev/null; then
 fi
 
 mkdir -p ~/.config
+ln -siv $here/kitty ~/.config/kitty
 ln -siv $here/nvim-lua ~/.config/nvim
 
 echo 'need sudo to symlink /etc/my.cnf'
