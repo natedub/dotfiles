@@ -2,20 +2,22 @@
 
 here=${0:a:h}
 
-ln -siv $here/gitconfig ~/.gitconfig
-ln -siv $here/gitignore ~/.gitignore
-ln -siv $here/direnvrc ~/.direnvrc
-ln -siv $here/.editorconfig ~/.editorconfig
+ln -sv $here/gitconfig ~/.gitconfig
+ln -sv $here/gitignore ~/.gitignore
+ln -sv $here/direnvrc ~/.direnvrc
+ln -sv $here/.editorconfig ~/.editorconfig
 
 if command -v hidutil &> /dev/null; then
 	mkdir -p ~/Library/LaunchAgents
-	ln -siv $here/KeyRemapping.plist ~/Library/LaunchAgents/KeyRemapping.plist
+	ln -sv $here/KeyRemapping.plist ~/Library/LaunchAgents/KeyRemapping.plist
 	launchctl load ~/Library/LaunchAgents/KeyRemapping.plist
 fi
 
 mkdir -p ~/.config
-ln -siv $here/kitty ~/.config/kitty
-ln -siv $here/nvim-lua ~/.config/nvim
+ln -sv $here/kitty ~/.config/kitty
+ln -sv $here/nvim-lua ~/.config/nvim
 
-echo 'need sudo to symlink /etc/my.cnf'
-sudo ln -siv $here/my.cnf /etc/my.cnf
+ln -sv $here/zprofile ~/.zprofile
+ln -sv $here/zshrc ~/.zshrc
+ln -sv $here/zsh-plugins ~/.zsh-plugins
+ln -sv $here/p10k.zsh ~/.p10k.zsh
