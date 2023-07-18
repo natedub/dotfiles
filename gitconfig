@@ -9,6 +9,7 @@
 	auto = 0
 [core]
 	excludesfile = ~/.gitignore
+	pager = less -F -X
 [rerere]
 	enabled = false
 [diff "blackbox"]
