@@ -35,8 +35,11 @@ source ~/.zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # Key bindings
 # --------------
+bindkey -v # vi mode
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
 
 # Environment
 # --------------
@@ -80,6 +83,11 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt INTERACTIVE_COMMENTS      # Parse hash as a comment on the CLI
 
+export CLICOLOR=1
+
+alias ls='ls -F'
+alias la='ls -laF'
+alias ll='ls -lF'
 alias qgit='qgit --branches --remotes --since="6 months ago" &> /dev/null &|'
 
 alias gitst="git status --column=auto"
