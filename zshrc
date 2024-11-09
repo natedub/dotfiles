@@ -60,6 +60,10 @@ if type direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
+if type rbenv > /dev/null; then
+  eval "$(rbenv init - zsh)"
+fi
+
 if command -v fnm >/dev/null 2>&1; then
   eval "$(fnm env --use-on-cd)"
 fi
@@ -140,6 +144,52 @@ gitcleanup() {
 }
 gitfo() {
 	echo git add $1 && git reset HEAD $1 || git checkout $1;
+}
+
+upfind() {
+   dir=`pwd`
+   while [ "$dir" != "/" ]; do
+      local_path=`find "$dir" -maxdepth 1 -name $1`
+      if [ ! -z $local_path ]; then
+         echo "$local_path"
+         return
+      fi
+      dir=`dirname "$dir"`
+    done
+}
+gw() {
+    $(upfind gradlew) "$@"
+}
+
+alias wireshark='/Applications/Wireshark.app/Contents/MacOS/Wireshark'
+
+# Wireshark over SSH
+# https://gist.github.com/shawnsi/70a3fdbc4079a09dc32c
+# On SUV you need to install wireshark
+# - yum install wireshark -y
+#
+# Usage:
+# - sshcap root@$(canyonero hostname)
+function sshcap {
+  # Sane default filter to prevent a feedback loop
+  # Custom filters are always appended to this
+  filter='not port 22'
+  filter_args=${@:2}
+  if [ -n "$filter_args" ]; then
+    filter="not port 22 and $filter_args"
+  fi
+
+  echo "Using filter: $filter"
+
+  # Options for dumpcap
+  opts="-i any -w - -f '$filter' 2>/dev/null"
+
+  # Hacky dumpcap path resolution via subshell
+  dumpcap="sudo \$(which dumpcap 2>/dev/null || echo /usr/sbin/dumpcap) $opts"
+
+  # This will try and use pcap legacy format compatibility if the flag is available
+  # Otherwise the default format is used
+  wireshark -k -i <(ssh -q $1 -C "$dumpcap -P || $dumpcap")
 }
 
 if [[ -e ~/.profilelocal ]]; then
