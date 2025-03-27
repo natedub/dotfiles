@@ -15,7 +15,7 @@ fi
 
 mkdir -p ~/.config
 ln -sv $here/kitty ~/.config/kitty
-ln -sv $here/nvim-lua ~/.config/nvim
+ln -sv $here/astronvim ~/.config/nvim
 
 ln -sv $here/zprofile ~/.zprofile
 ln -sv $here/zshrc ~/.zshrc
