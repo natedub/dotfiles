@@ -65,6 +65,22 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+
+        -- MINE
+        ["<C-h>"] = "<C-w>h",
+        ["<C-j>"] = "<C-w>j",
+        ["<C-k>"] = "<C-w>k",
+        ["<C-l>"] = "<C-w>l",
+
+        ["td"] = ":tabnew %:p:h<cr>",
+        ["th"] = ":split<cr>",
+        ["tn"] = ":tabnext<cr>",
+        ["tp"] = ":tabprev<cr>",
+        ["ts"] = ":vsplit<cr>", -- this variant tries to split quickfix windows too, may no longer be necessary :vertical botright split<cr,
+
+        ["<C-s>"] = '<C-R>=expand("%:p:h")<cr>/',
+
+        ["<Leader>ev"] = ":tabe $MYVIMRC<cr>",
       },
     },
   },
