@@ -55,7 +55,7 @@ require('packer').startup(function(use)
     --use {'jose-elias-alvarez/null-ls.nvim', branch = 'main'}
 
     -- typescript language server
-    use {'jose-elias-alvarez/typescript.nvim', branch = 'main'}
+    --use {'jose-elias-alvarez/typescript.nvim', branch = 'main'}
 
     -- good autocomplete
     use {'hrsh7th/cmp-nvim-lsp', branch = 'main'}
@@ -90,6 +90,8 @@ require('packer').startup(function(use)
 
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-telescope/telescope-fzf-native.nvim'
+
+    use 'isobit/vim-caddyfile'
 end)
 
 -- setup dracula, assuming that the terminal has the correct 16 ansi colors set
@@ -139,7 +141,7 @@ mapkey('n', '<Leader>ev', ':tabe $MYVIMRC<cr>')
 mapkey('n', '<leader>ep', ':lua require"telescope.builtin".find_files({cwd="~/.local/share/nvim/site/pack/packer/start"})<cr>')
 mapkey('n', '<leader>en', ':lua require"telescope.builtin".find_files({cwd="~/.config/nvim"})<cr>')
 mapkey('n', '<leader>gp', ':lua require"telescope.builtin".live_grep({cwd="~/.local/share/nvim/site/pack/packer/start"})<cr>')
-mapkey('n', '<Leader>sv', ':source $MYVIMRC<cr>:bufdo e<cr>')
+mapkey('n', '<leader>sv', ':source $MYVIMRC<cr>')
 
 mapkey('n', '<leader>ef', ':lua require"telescope.builtin".find_files()<cr>')
 mapkey('n', '<leader>ea', ':lua require"telescope.builtin".find_files({no_ignore=true})<cr>')
