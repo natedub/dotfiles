@@ -22,10 +22,10 @@ return {
       virtual_text = true,
       underline = true,
     },
-    clipboard = "",
     -- vim options can be configured here
     options = {
       opt = { -- vim.opt.<key>
+        clipboard = "",
         relativenumber = true, -- sets vim.opt.relativenumber
         number = true, -- sets vim.opt.number
         spell = false, -- sets vim.opt.spell
@@ -67,20 +67,24 @@ return {
         -- ["<C-S>"] = false,
 
         -- MINE
-        ["<C-h>"] = "<C-w>h",
-        ["<C-j>"] = "<C-w>j",
-        ["<C-k>"] = "<C-w>k",
-        ["<C-l>"] = "<C-w>l",
+        ["<C-h>"] = { "<C-w>h" },
+        ["<C-j>"] = { "<C-w>j" },
+        ["<C-k>"] = { "<C-w>k" },
+        ["<C-l>"] = { "<C-w>l" },
 
-        ["td"] = ":tabnew %:p:h<cr>",
-        ["th"] = ":split<cr>",
-        ["tn"] = ":tabnext<cr>",
-        ["tp"] = ":tabprev<cr>",
-        ["ts"] = ":vsplit<cr>", -- this variant tries to split quickfix windows too, may no longer be necessary :vertical botright split<cr,
+        ["td"] = { ":tabnew %:p:h<cr>", desc = "New tab with current file's directory listing" },
+        ["th"] = { ":split<cr>", desc = "Horizontal split" },
+        ["tn"] = { ":tabnext<cr>", desc = "New tab" },
+        ["tp"] = { ":tabprev<cr>", desc = "Previous tab" },
+        ["ts"] = { ":vsplit<cr>", desc = "Vertical split" },
+        -- this variant tries to split quickfix windows too, may no longer be necessary :vertical botright split<cr,
 
-        ["<C-s>"] = '<C-R>=expand("%:p:h")<cr>/',
-
-        ["<Leader>ev"] = ":tabe $MYVIMRC<cr>",
+        ["<Leader>ev"] = { ":tabe $MYVIMRC<cr>", desc = "Open vimrc" },
+        ["<Leader>sv"] = { function() require("astrocore").reload() end, desc = "Reload Astronvim (experimental)" },
+      },
+      c = {
+        ["<C-s>"] = { '<C-R>=expand("%:p:h")<cr>/', desc = "" },
+        ["<C-e>"] = { '<C-R>=expand("~/Code/dotfiles/astronvim/lua")<cr>/', desc = "" },
       },
     },
   },
