@@ -51,10 +51,10 @@ bindkey '^[[F' end-of-line
 # Environment
 # --------------
 
-if type pyenv > /dev/null; then
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
+#if type pyenv > /dev/null; then
+#  eval "$(pyenv init -)"
+#  eval "$(pyenv virtualenv-init -)"
+#fi
 
 if type direnv > /dev/null; then
   eval "$(direnv hook zsh)"
