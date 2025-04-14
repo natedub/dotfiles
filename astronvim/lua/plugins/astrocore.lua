@@ -79,7 +79,7 @@ return {
         ["ts"] = { ":vsplit<cr>", desc = "Vertical split" },
         -- this variant tries to split quickfix windows too, may no longer be necessary :vertical botright split<cr,
 
-        ["<Leader>ev"] = { ":tabe $MYVIMRC<cr>", desc = "Open vimrc" },
+        ["<Leader>ev"] = { ":tabe ~/.config/nvim/lua/plugins/<cr>", desc = "Open vimrc" },
         ["<Leader>sv"] = { function() require("astrocore").reload() end, desc = "Reload Astronvim (experimental)" },
       },
       c = {
