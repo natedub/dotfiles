@@ -92,7 +92,24 @@ export CLICOLOR=1
 alias ls='ls -F'
 alias la='ls -laF'
 alias ll='ls -lF'
-alias qgit='qgit --branches --remotes --since="6 months ago" &> /dev/null &|'
+
+qgit() {
+  declare -a args;
+  if [[ -n "$1" ]]; then
+    args+=("$1")
+  else
+    args+=("--branches")
+    if git show-ref --quiet "refs/remotes/origin/github-pages"; then
+      args+=("--exclude=origin/github-pages*")
+    fi
+    if git show-ref --quiet "refs/remotes/origin/gh-pages"; then
+      args+=("--exclude=origin/gh-pages*")
+    fi
+    args+=("--remotes")
+  fi
+
+  ~/bin/qgit "$args[@]" --since="6 months ago" &> /dev/null &|
+}
 
 alias gitst="git status --column=auto"
 alias gitc="git commit"
