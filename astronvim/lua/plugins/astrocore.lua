@@ -26,11 +26,27 @@ return {
     options = {
       opt = { -- vim.opt.<key>
         clipboard = "",
-        relativenumber = true, -- sets vim.opt.relativenumber
-        number = true, -- sets vim.opt.number
-        spell = false, -- sets vim.opt.spell
-        signcolumn = "yes", -- sets vim.opt.signcolumn to yes
-        wrap = false, -- sets vim.opt.wrap
+        relativenumber = true,
+        number = true,
+        spell = false,
+        wrap = true,
+        list = true,
+        listchars = "tab:» ,trail:·",
+
+        hlsearch = false,
+        incsearch = true,
+
+        tabstop = 4,
+        shiftwidth = 4,
+        smartindent = true,
+
+        signcolumn = "yes",
+        scrolloff = 8,
+
+        swapfile = false,
+        backup = false,
+        undodir = os.getenv "HOME" .. "/.vim/undodir",
+        undofile = true,
       },
       g = { -- vim.g.<key>
         -- configure global vim variables (vim.g)
@@ -72,6 +88,13 @@ return {
         ["<C-k>"] = { "<C-w>k" },
         ["<C-l>"] = { "<C-w>l" },
 
+        -- Center cursor when scrolling by half page or searching
+        ["<C-d>"] = { "<C-d>zz" },
+        ["<C-u>"] = { "<C-u>zz" },
+        ["n"] = { "nzzzv" },
+        ["N"] = { "Nzzzv" },
+
+        -- Tab navigation
         ["td"] = { ":tabnew %:p:h<cr>", desc = "New tab with current file's directory listing" },
         ["th"] = { ":split<cr>", desc = "Horizontal split" },
         ["tn"] = { ":tabnext<cr>", desc = "New tab" },
@@ -85,6 +108,9 @@ return {
       c = {
         ["<C-s>"] = { '<C-R>=expand("%:p:h")<cr>/', desc = "" },
         ["<C-e>"] = { '<C-R>=expand("~/Code/dotfiles/astronvim/lua")<cr>/', desc = "" },
+      },
+      x = {
+        ["<Leader>p"] = '"_dP',
       },
     },
   },
